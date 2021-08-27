@@ -1,3 +1,5 @@
+import { Schema } from './data/BasicUser'
+
 export const initialState = {
     user:{
         type: ''
@@ -7,7 +9,10 @@ export const initialState = {
 export const reducer = (state, action) => {
     switch(action.type){
         case 'LOGIN':
-            state.user.type = action.item.type
+            console.log(action.user)
+            if(action.item.type === 'user') 
+                state.user = Schema
+
             return{
                 ...state
             }

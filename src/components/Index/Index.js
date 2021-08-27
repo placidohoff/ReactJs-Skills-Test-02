@@ -7,9 +7,10 @@ function Index() {
     const history = useHistory()
 
     useEffect(() =>{
-        if(user.type !== 'user')
-            history.push('/login')
+        // if(user.type !== 'user')
+        //     history.push('/login')
 
+        console.log(user)
     },[])
 
     return(
