@@ -1,0 +1,31 @@
+.index {
+  /* background-color: background-color: #000000; */
+  /* background-image: linear-gradient(315deg, #000000 0%, #414141 74%); */
+  /* background: linear-gradient(
+    90deg,
+    hsla(0, 0%, 0%, 1) 0%,
+    hsla(325, 8%, 69%, 1) 100%
+  ); */
+  background: #000000;
+  background: -webkit-linear-gradient(top left, #000000, #5c615b);
+  background: -moz-linear-gradient(top left, #000000, #5c615b);
+  background: linear-gradient(to bottom right, #000000, #5c615b);
+}
+
+.index p {
+  color: white;
+}
+
+.index span {
+  color: white;
+  font-size: 12px;
+}
+
+.index .indexMusicIndustry {
+  font-size: 10px;
+  margin-right: 5px;
+}
+
+.index h1 {
+  color: white;
+}
