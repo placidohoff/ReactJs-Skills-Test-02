@@ -1,0 +1,9 @@
+.navigationBody ul li {
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.navigationBody ul li:hover {
+  background-color: #00cc9b;
+}

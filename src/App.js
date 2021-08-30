@@ -3,6 +3,7 @@ import './App.css'
 import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router-dom"
 import Login from './components/Login/Login'
 import Index from './components/Index/Index'
+import Navigation from './components/Navigation/Navigation'
 
 const App =() => {
   return(
@@ -10,6 +11,7 @@ const App =() => {
     <div className="app">
       <Switch>
         <Route path="/index">
+          {/* <Navigation /> */}
           <Index />
         </Route>
 
