@@ -9,6 +9,8 @@ import './Navigation.css'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, fab, faTwitterSquare, faFacebook, faLinkedin, faGithub, faYoutube, faTelegram, faYoutubeSquare, faDiscord } from "@fortawesome/free-brands-svg-icons"
+import { faBalanceScale } from '@fortawesome/free-solid-svg-icons';
+import './Navigation.css'
 
 function Navigation(){
     const [isMenuOpened, setIsMenuOpened] = useState(false)
@@ -33,12 +35,16 @@ function Navigation(){
             style={{ fontSize: "30px" }}
           >
 
-            <p>
-              <a href="#" onClick={handleClick}>
-                Click here
-              </a>{""}
+            
+          <p 
+            onClick={handleClick}
+            className="hamburger"
+          >
+              &#9776;
+          </p>
               
-            </p>
+              
+            
           </OffCanvasBody>
           <OffCanvasMenu className={'navigationBody'}
             width={500}

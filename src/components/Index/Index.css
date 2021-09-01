@@ -41,3 +41,7 @@
   padding-right: 10px;
   cursor: pointer;
 }
+
+.pagination:hover {
+  transform: scale(1.05);
+}

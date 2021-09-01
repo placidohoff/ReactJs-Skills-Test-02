@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
+import './ListLeaderBoard.css'
 
 export default function ListLeaderBoard(props) {
     return (

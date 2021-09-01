@@ -1,3 +1,8 @@
+.listindex:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
 .listIndexP {
   font-size: 12px;
 }

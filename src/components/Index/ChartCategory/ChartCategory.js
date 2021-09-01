@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../../img/guitar.jpeg'
 import guitar from '../../../img/guitar.jpeg'
+import './ChartCategory.css'
 
 function ChartCategory(props){
     return(
@@ -13,6 +14,7 @@ function ChartCategory(props){
                 marginTop: '10px',
                 alignItems:'end',
                 zIndex: -20
+
             }}
         >
             <span style={{zIndex:2, color:'white',fontWeight:'bold', fontSize:'20px', gridColumn:1, gridRow:1, alignSelf:'flex-end', justifySelf:'flex-end'}}>{props.name}</span>

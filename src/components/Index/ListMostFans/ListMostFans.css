@@ -1,3 +1,8 @@
+.listmostfans:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
 .listmostfans Container Row Col h4 {
   color: white;
 }
