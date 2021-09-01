@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../../img/guitar.jpeg'
 import guitar from '../../../img/guitar.jpeg'
 import './ChartCategory.css'
+import Popup from '../../Popup/Popup'
 
 function ChartCategory(props){
+    const [show, setShow] = useState(false)
+    
+    const showPopup = () =>  setShow(true)
+
+    const close = () => setShow(false)
     return(
+        <>
+        <Popup 
+            show={show}
+            close={close}
+        />  
         <div className="chartCategory" 
-        onClick={e => e.stopPropagation()}
+        onClick={e => {e.stopPropagation(); showPopup()}}
             style={{
                 display:'grid',
                 backgroundColor:'#00cc9b',
@@ -21,6 +32,7 @@ function ChartCategory(props){
             
             <img style={{zIndex:1, gridColumn:1, gridRow:1, opacity:'.4', borderRadius:'20px', alignSelf:'flex-start'}} class="img-fluid" src={guitar} />
         </div>
+        </>
     )
 }
 

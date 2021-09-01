@@ -12,3 +12,8 @@ h1 {
 p {
   color: white;
 }
+
+.view-index-buy:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}

@@ -17,7 +17,7 @@ function Login(){
                     type: 'user'
                 }
             })
-            history.push('/index')
+            history.push('/charts')
         }
     }
 

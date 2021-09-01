@@ -1,14 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { useStateValue } from '../../StateProvider'
 import './ViewIndex.css'
 import DisplayChart from '../DisplayChart/DisplayChart.js'
 import IndexHoldingsChart from './IndexHoldingsChart/IndexHoldingsChart'
 import Navigation from '../Navigation/Navigation'
+import { useHistory } from 'react-router'
+import Popup from '../Popup/Popup'
 
 export default function ViewIndex() {
     const [{user,indexFunds, viewingIndex}, dispatch] = useStateValue()
+    const price = Math.floor(Math.random() * 4444)
+    const marketCap = Math.floor(Math.random() * 20000000)
+    const holders = Math.floor(Math.random() * 4000000)
+    const history = useHistory();
+    
+    const [show, setShow] = useState(false)
+    
+    const showPopup = () =>  setShow(true)
+
+    const close = () => setShow(false)
+
     return (
+        
+        <>
+        <Popup 
+            show={show}
+            close={close}
+        />
         <div className="viewindex">
         <Container>
         <Navigation
@@ -34,7 +53,7 @@ export default function ViewIndex() {
                     </p>
                 </Col>
                 <Col className="d-flex">
-                    <div className="d-flex p-3 align-self-center"
+                    <div className="d-flex p-2 align-self-center"
                          style={{border:'2px solid white'}}
                     >
                         <div className="justify-content-flex-start">     
@@ -43,8 +62,8 @@ export default function ViewIndex() {
                         </Button>
                             
                         </div>
-                        <div>
-                            <p>[TODAY'S PRICE]</p>
+                        <div style={{display:'flex',alignItems:'center'}}>
+                            <p>${price /100}</p>
                         </div>
                     </div>
                 </Col>
@@ -52,14 +71,24 @@ export default function ViewIndex() {
             
             <Row className="d-flex justify-content-between">
                 <Col>
-                    [MARKET CAP]
+                    <p>${marketCap.toLocaleString() + ` market cap`}</p>
                 </Col>
                 <Col>
-                    [NUMBER HOLDERS]
+                    <p>{holders.toLocaleString() + ` holders`}</p>
                 </Col>
                 <Col>
-                    <div>
-                        [BUY {viewingIndex.name}]
+                    <div className="d-flex p-2 justify-content-center view-index-buy"
+                        onClick={showPopup}                        
+                        style={{
+                            
+                            backgroundColor: '#00cc9b'
+                        }}
+                    >
+                        <p
+                            style={{fontWeight:'bold', color:'black'}}
+                        >
+                            BUY ${viewingIndex.name}
+                        </p>
                     </div>
                 </Col>
             </Row>
@@ -96,14 +125,35 @@ export default function ViewIndex() {
                             <div
                                 style={{
                                     display:'flex',
-                                    flexDirection:'column'
+                                    flexDirection:'column',
+                                    cursor: 'pointer'
                                     
                                 }}
                             >
                                 {/* <div
                                     style={{backgroundColor:'#00cc9b',}}
                                 > */}
-                                    <img className="img-fluid" src={fund.img} />
+                                    <img 
+                                        onClick={e => {
+                                            e.stopPropagation();
+                                            dispatch({
+                                                type: 'VIEW_INDEX',
+                                                item: fund
+                                            });
+                                            //alert('hello')
+                                            history.push('/viewindex');
+                                            
+                                            window.scrollTo({
+                                                top: 0,
+                                                behavior:'smooth'
+                                            })
+
+                                            }
+                                            
+                                            
+                                    
+                                         }
+                                        className="img-fluid" src={fund.img} />
                                 {/* </div> */}
                                 <div
                                     style={{
@@ -112,8 +162,9 @@ export default function ViewIndex() {
                                         justifyContent: 'center',
                                         fontWeight: 'bold'
                                     }}
+                                    
                                 >
-                                <p>{fund.name}</p>
+                                    <p>{fund.name}</p>
                                 </div>
                             </div>
                         </Col>
@@ -124,5 +175,6 @@ export default function ViewIndex() {
             
         </Container>
         </div>
+        </>                                
     )
 }

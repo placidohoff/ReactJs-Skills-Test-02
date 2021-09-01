@@ -12,7 +12,7 @@ import Navigation from '../Navigation/Navigation'
 import ListIndexSpotlight from './ListIndexSpotlight/ListIndexSpotlight'
 import ListMostFans from './ListMostFans/ListMostFans'
 import ListLeaderBoard from './ListLeaderBoard/ListLeaderBoard'
-// import ListIndexFund from './ListIndexFund/ListIndexFund'
+import Popup from '../Popup/Popup';
 
 function Index() {
     const [{user, indexFunds, artistTokens }, dispatch] = useStateValue()
@@ -106,11 +106,7 @@ function Index() {
     }
 
     useEffect(() =>{
-        // user:{
-        //     type: ''
-        // }
-        // if(user.type !== 'user')
-        //     history.push('/login') 
+ 
         if(user == ''){
             dispatch({
                 type:'LOGIN',
@@ -120,15 +116,15 @@ function Index() {
             })
         }
 
-        //alert(code)
-
-        // console.log(user)
-        console.log(artistTokens)
     },[])
 
     return(
         <div class="index">
             <Container>
+                {/* <Popup 
+                    show={show}
+                    close={close}
+                /> */}
                 <Navigation
                     style={{zIndex:100}}
                 />
@@ -192,11 +188,13 @@ function Index() {
                     style={{display:'flex'}}
                 >
                     <Col xs={6} md={3}
-                        // style={{border:'1px solid white'}}
+                        
                     > 
+                        <div>
                         <ChartCategory 
                             name="GENRES"                
                         />
+                        </div>
                     </Col>
                     <Col xs={6}  md={3}
                         // style={{border:'1px solid white'}}

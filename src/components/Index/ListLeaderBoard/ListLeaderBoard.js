@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import './ListLeaderBoard.css'
+import Popup from '../../Popup/Popup'
 
 export default function ListLeaderBoard(props) {
+    const [show, setShow] = useState(false)
+    
+    const showPopup = () =>  setShow(true)
+
+    const close = () => setShow(false)
+
     return (
-        <div className="listleaderboard">
+        <>
+        <Popup 
+                show={show}
+                close={close}
+            />
+        <div className="listleaderboard"
+            onClick={e => showPopup()}
+        >
+            
             <Container>
                 <Row>
                     {/* <Col><img className="img-fluid rounded-circle" src={props.artist.img} /></Col> */}
@@ -34,5 +49,6 @@ export default function ListLeaderBoard(props) {
                 </Row>
             </Container>
         </div>
+        </>
     )
 }

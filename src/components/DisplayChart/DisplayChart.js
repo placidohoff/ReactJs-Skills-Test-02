@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import './DisplayChart.css'
+import Popup from '../Popup/Popup'
 
 export default function DisplayChart() {
+    const [show, setShow] = useState(false)
+    
+    const showPopup = () =>  setShow(true)
+
+    const close = () => setShow(false)
+
     return (
+        <>
+        <Popup 
+            show={show}
+            close={close}
+        />
         <Container 
             style={{
                 borderLeft:'2px solid white',
@@ -27,13 +39,13 @@ export default function DisplayChart() {
                         
                     >
                         <div style={{display:'flex'}}>
-                            <div className="display-chart-time">1h</div>
-                            <div className="display-chart-time">24h</div>
-                            <div className="display-chart-time">7d</div>
-                            <div className="display-chart-time">14d</div>
-                            <div className="display-chart-time">30d</div>
-                            <div className="display-chart-time">1y</div>
-                            <div className="display-chart-time">Max</div>
+                            <div onClick={showPopup} className="display-chart-time">1h</div>
+                            <div onClick={showPopup} className="display-chart-time">24h</div>
+                            <div onClick={showPopup} className="display-chart-time">7d</div>
+                            <div onClick={showPopup} className="display-chart-time">14d</div>
+                            <div onClick={showPopup} className="display-chart-time">30d</div>
+                            <div onClick={showPopup} className="display-chart-time">1y</div>
+                            <div onClick={showPopup} className="display-chart-time">Max</div>
 
                         </div>
                     </div>
@@ -58,5 +70,6 @@ export default function DisplayChart() {
    
             
         </Container>
+        </>
     )
 }

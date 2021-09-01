@@ -17,6 +17,11 @@ const App =() => {
           <Index />
         </Route>
 
+        <Route path="/charts">
+          {/* <Navigation /> */}
+          <Index />
+        </Route>
+
         <Route path="/login">
           <Login />
         </Route>

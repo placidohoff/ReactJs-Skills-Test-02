@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Row, Col , Button} from 'react-bootstrap'
 import './ListMostFans.css'
+import Popup from '../../Popup/Popup'
 
 export default function ListMostFans(props) {
+    const [show, setShow] = useState(false)
+    
+    const showPopup = () =>  setShow(true)
+
+    const close = () => setShow(false)
+
     return (
+        <>
+        <Popup 
+            show={show}
+            close={close}
+        />
         <div 
             className="listmostfans"
             style={{marginBottom: '10px'}}
+            onClick={e => showPopup()}
         >
             <Container>
             <Row style={{display:'flex'}}>
@@ -35,5 +48,6 @@ export default function ListMostFans(props) {
             </Row>
             </Container>
         </div>
+        </>
     )
 }

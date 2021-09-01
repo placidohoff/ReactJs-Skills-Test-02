@@ -11,13 +11,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, fab, faTwitterSquare, faFacebook, faLinkedin, faGithub, faYoutube, faTelegram, faYoutubeSquare, faDiscord } from "@fortawesome/free-brands-svg-icons"
 import { faBalanceScale } from '@fortawesome/free-solid-svg-icons';
 import './Navigation.css'
+import Popup from '../Popup/Popup';
+import { useHistory } from 'react-router-dom'
 
 function Navigation(){
     const [isMenuOpened, setIsMenuOpened] = useState(false)
 
-    const handleClick = (e) => {e.stopPropagation(); e.preventDefault(); setIsMenuOpened(!isMenuOpened); console.log(e)}
+    const [show,setShow] = useState(false)
+    
+    const showPopup = () => setShow(true)
 
+    const close = () => setShow(false)
+
+    const history = useHistory()
+    
     return (
+      <>
+      <Popup
+        show={show}
+        close={close}
+      />
         <OffCanvas
           width={400}
           transitionDuration={300}
@@ -37,7 +50,7 @@ function Navigation(){
 
             
           <p 
-            onClick={handleClick}
+            onClick={e => setIsMenuOpened(!isMenuOpened)}
             className="hamburger"
           >
               &#9776;
@@ -53,22 +66,21 @@ function Navigation(){
                 width: 200,
                 position: 'absolute',
                 top:0,
-                cursor: 'pointer',
                 zIndex: 500,
                 backgroundColor: 'black'
 
             }}
           >
-            <p onClick={handleClick}><img className="img-fluid" src={Logo} /></p>
+            <p><img className="img-fluid" src={Logo} /></p>
             <ul
                 style={{listStyle:'none'}}
             >
-              <li onClick={handleClick}>CHARTS</li>
-              <li onClick={handleClick}>SWAP</li>
-              <li style={{hover: 'default'}}>COLLAB</li>
-              <li>DROPS</li>
-              <li>COLLECTIONS</li>
-              <li style={{zIndex: 2000, position:'relative', cursor:'default'}} onClick={e => {e.stopPropagation(); setIsMenuOpened(!isMenuOpened) } }>
+              <li onClick={e=> history.push('/charts')}>CHARTS</li>
+              <li onClick={showPopup}>SWAP</li>
+              <li onClick={showPopup}>COLLAB</li>
+              <li onClick={showPopup}>DROPS</li>
+              <li onClick={showPopup}>COLLECTIONS</li>
+              <li onClick={showPopup}>
                   GIVEAWAYS
               </li>
             </ul>
@@ -89,7 +101,7 @@ function Navigation(){
                         }}
                     >
                         
-                        <FontAwesomeIcon className="icon" size='3x' color="white" icon={faGithub}/>
+                        <FontAwesomeIcon onClick={showPopup} className="icon" size='3x' color="white" icon={faGithub}/>
                     </Col>
                     <Col
                         xs={3}
@@ -98,7 +110,7 @@ function Navigation(){
                           justifyContent: 'flex-start'
                         }}
                     >
-                        <FontAwesomeIcon className="icon" size='3x' color="red" icon={faYoutubeSquare}/>
+                        <FontAwesomeIcon onClick={showPopup} className="icon" size='3x' color="red" icon={faYoutubeSquare}/>
                     </Col>
                     <Col
                         xs={3}
@@ -107,7 +119,7 @@ function Navigation(){
                           justifyContent: 'flex-start'
                         }}
                     >
-                        <FontAwesomeIcon className="icon" size='3x' color="#0088cc" icon={faTelegram}/>
+                        <FontAwesomeIcon onClick={showPopup} className="icon" size='3x' color="#0088cc" icon={faTelegram}/>
                     </Col>
                 
                 </Row>
@@ -117,17 +129,17 @@ function Navigation(){
                         xs={3}
                     >
                         
-                        <FontAwesomeIcon className="icon" size='3x' color="#0072b1" icon={faLinkedin}/>
+                        <FontAwesomeIcon onClick={showPopup} className="icon" size='3x' color="#0072b1" icon={faLinkedin}/>
                     </Col>
                     <Col
                         xs={3}
                     >
-                        <FontAwesomeIcon className="icon" size='3x' color="#1DA1F2" icon={faTwitterSquare}/>
+                        <FontAwesomeIcon onClick={showPopup} className="icon" size='3x' color="#1DA1F2" icon={faTwitterSquare}/>
                     </Col>
                     <Col
                         xs={3}
                     >
-                        <FontAwesomeIcon className="icon" size='3x' color="#5865F2" icon={faDiscord}/>
+                        <FontAwesomeIcon onClick={showPopup} className="icon" size='3x' color="#5865F2" icon={faDiscord}/>
                     </Col>
                     
                 </Row>                
@@ -135,6 +147,7 @@ function Navigation(){
 
           </OffCanvasMenu>
         </OffCanvas>
+      </>
       );
 }
 
