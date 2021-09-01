@@ -137,7 +137,6 @@ function Index() {
                         
                         style={{
                             display:'flex',
-                            border: '1px dotted black',
                             justifyContent: 'flex-end'
                         }}
                     >    <span>
@@ -152,10 +151,10 @@ function Index() {
                         xs={{span: 4, fontWeight: 'bold', mx: 'auto'}}
                         // sm={4}
                         // className="ml-4 justify-content-center"
-                        style={{display:'flex', justifyContent:'flex-start', alignItems:'flex-end'}}
+                        style={{display:'flex', justifyContent:'center', alignItems:'flex-end'}}
                     >
                         <span
-                            style={{display:'flex',fontSize:'32px', fontWeight:'bold', alignItems:'flex-end'}}
+                            style={{display:'flex',fontSize:'32px', fontWeight:'bold', justifyContent:'center', alignItems:'flex-end'}}
                         >
                             CHARTS
                         </span>

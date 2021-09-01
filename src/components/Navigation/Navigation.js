@@ -73,23 +73,41 @@ function Navigation(){
               </li>
             </ul>
             <Container>
-                <Row>
+                <Row 
+                  // style={{
+                  //   display:'flex',
+                  //   justifyContent:'center'
+                  
+                  // }}
+                >
                 
                     <Col
                         xs={3}
+                        style={{
+                          display:'flex',
+                          justifyContent: 'flex-start'
+                        }}
                     >
                         
-                        <FontAwesomeIcon size='3x' color="white" icon={faGithub}/>
+                        <FontAwesomeIcon className="icon" size='3x' color="white" icon={faGithub}/>
                     </Col>
                     <Col
                         xs={3}
+                        style={{
+                          display:'flex',
+                          justifyContent: 'flex-start'
+                        }}
                     >
-                        <FontAwesomeIcon size='3x' color="red" icon={faYoutubeSquare}/>
+                        <FontAwesomeIcon className="icon" size='3x' color="red" icon={faYoutubeSquare}/>
                     </Col>
                     <Col
                         xs={3}
+                        style={{
+                          display:'flex',
+                          justifyContent: 'flex-start'
+                        }}
                     >
-                        <FontAwesomeIcon size='3x' color="blue" icon={faTelegram}/>
+                        <FontAwesomeIcon className="icon" size='3x' color="#0088cc" icon={faTelegram}/>
                     </Col>
                 
                 </Row>
@@ -99,17 +117,17 @@ function Navigation(){
                         xs={3}
                     >
                         
-                        <FontAwesomeIcon size='3x' color="blue" icon={faLinkedin}/>
+                        <FontAwesomeIcon className="icon" size='3x' color="#0072b1" icon={faLinkedin}/>
                     </Col>
                     <Col
                         xs={3}
                     >
-                        <FontAwesomeIcon size='3x' color="blue" icon={faTwitterSquare}/>
+                        <FontAwesomeIcon className="icon" size='3x' color="#1DA1F2" icon={faTwitterSquare}/>
                     </Col>
                     <Col
                         xs={3}
                     >
-                        <FontAwesomeIcon size='3x' color="blue" icon={faDiscord}/>
+                        <FontAwesomeIcon className="icon" size='3x' color="#5865F2" icon={faDiscord}/>
                     </Col>
                     
                 </Row>                

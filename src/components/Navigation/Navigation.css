@@ -12,3 +12,7 @@
   font-size: 40px;
   cursor: pointer;
 }
+
+.icon:hover {
+  transform: scale(1.05);
+}
