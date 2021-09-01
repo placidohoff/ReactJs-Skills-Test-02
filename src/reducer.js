@@ -3,11 +3,11 @@ import { getIndexFunds } from './data/IndexFunds'
 import { getArtistTokens } from './data/Tokens/ArtistTokens'
 
 export const initialState = {
-    user:{
-        type: ''
-    },
+    user:'',
     indexFunds: [],
-    artistTokens: []
+    artistTokens: [],
+    viewingIndex: {},
+    viewingArtist: {}
 }
 
 export const reducer = (state, action) => {
@@ -19,6 +19,11 @@ export const reducer = (state, action) => {
                 state.indexFunds = getIndexFunds()
                 state.artistTokens = getArtistTokens()
             }
+            return{
+                ...state
+            }
+        case 'VIEW_INDEX':
+            state.viewingIndex = action.item
             return{
                 ...state
             }

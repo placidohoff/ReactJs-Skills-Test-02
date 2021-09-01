@@ -5,6 +5,7 @@ import Login from './components/Login/Login'
 import Index from './components/Index/Index'
 import Navigation from './components/Navigation/Navigation'
 import Test from './components/Test/Test'
+import ViewIndex from './components/ViewIndex/ViewIndex.js'
 
 const App =() => {
   return(
@@ -22,6 +23,10 @@ const App =() => {
 
         <Route path="/test">
           <Test />
+        </Route>
+
+        <Route path="/viewindex">
+          <ViewIndex />
         </Route>
 
         <Route path="/">

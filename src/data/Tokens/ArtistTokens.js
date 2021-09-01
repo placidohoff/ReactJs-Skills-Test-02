@@ -34,7 +34,7 @@ const getDailyPercentChange = () => {
 
 export const getArtistTokens = () => {
     let tokens = []
-    for(let i = 0; i < 10; i++){
+    for(let i = 0; i < 20; i++){
         tokens.push(artistToken())
     }
     return tokens;

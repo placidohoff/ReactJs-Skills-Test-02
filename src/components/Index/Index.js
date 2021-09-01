@@ -106,14 +106,19 @@ function Index() {
     }
 
     useEffect(() =>{
+        // user:{
+        //     type: ''
+        // }
         // if(user.type !== 'user')
-        //     history.push('/login')
-        dispatch({
-            type:'LOGIN',
-            item:{
-                type: 'user'
-            }
-        })
+        //     history.push('/login') 
+        if(user == ''){
+            dispatch({
+                type:'LOGIN',
+                item:{
+                    type: 'user'
+                }
+            })
+        }
 
         //alert(code)
 

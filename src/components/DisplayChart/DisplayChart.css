@@ -1,0 +1,23 @@
+.display-chart-time {
+  padding: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+}
+
+.display-chart-time:hover {
+  background-color: #00cc9b;
+}
+
+.display-chart-price {
+  padding: 2px;
+  color: white;
+  cursor: default;
+}
+
+.display-chart-price:hover {
+  background-color: #00cc9b;
+  transform: scale(1.05);
+}

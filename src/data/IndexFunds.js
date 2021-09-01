@@ -1,10 +1,4 @@
-// export const IndexFunds = [
-//     {
-//         Id: Math.random() * 1000,
-//         Name: 'Hip-Hop Index',
-//         Description: ''
-//     }
-// ]
+import { getArtistTokens } from "../data/Tokens/ArtistTokens"
 
 const indexCollection = [
     {
@@ -39,16 +33,40 @@ const indexCollection = [
 
 ]
 
+const artists = getArtistTokens();
+let overallPercent = 100;
+
 function indexFund(){
     const nameAndImageNumber = Math.floor(Math.random() * indexCollection.length)
     // const name = 
+    
+    let holdings = []
+    
+    let i = 0;
+
+    const getPercent = (total) => {
+        let number = Math.floor(Math.random() * overallPercent)
+        overallPercent -= number
+        return number
+    }
+
+    for(let i = 0; i < 6; i++){
+        //console.log(artists)
+        holdings.push({
+            tokenName: artists[i].name,
+            tokenImg: artists[i].img,
+            percentAllocation: getPercent(overallPercent)
+        })
+        // 
+    }
+
     return {
         id: Math.floor(Math.random() * 9999),
         name: indexCollection[nameAndImageNumber].name,
         img: indexCollection[nameAndImageNumber].img,
         description: '',
         marketCap: 0,
-        underlyingAssets: '',
+        underlyingAssets: holdings,
         dailyPercentChange: Math.floor(Math.random() * 35) - Math.floor(Math.random() * 15),
 
  
