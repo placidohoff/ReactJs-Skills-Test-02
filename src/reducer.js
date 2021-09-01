@@ -1,11 +1,13 @@
 import { Schema } from './data/BasicUser'
-import { IndexFunds } from './data/IndexFunds'
+import { getIndexFunds } from './data/IndexFunds'
+import { getArtistTokens } from './data/Tokens/ArtistTokens'
 
 export const initialState = {
     user:{
         type: ''
     },
-    indexFunds: []
+    indexFunds: [],
+    artistTokens: []
 }
 
 export const reducer = (state, action) => {
@@ -14,7 +16,8 @@ export const reducer = (state, action) => {
             console.log(action.user)
             if(action.item.type === 'user'){ 
                 state.user = Schema
-                state.indexFunds = IndexFunds
+                state.indexFunds = getIndexFunds()
+                state.artistTokens = getArtistTokens()
             }
             return{
                 ...state

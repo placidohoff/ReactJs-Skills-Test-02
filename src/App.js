@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router
 import Login from './components/Login/Login'
 import Index from './components/Index/Index'
 import Navigation from './components/Navigation/Navigation'
+import Test from './components/Test/Test'
 
 const App =() => {
   return(
@@ -17,6 +18,10 @@ const App =() => {
 
         <Route path="/login">
           <Login />
+        </Route>
+
+        <Route path="/test">
+          <Test />
         </Route>
 
         <Route path="/">

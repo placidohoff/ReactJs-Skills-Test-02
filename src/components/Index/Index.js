@@ -9,18 +9,116 @@ import { faChartLine } from '@fortawesome/free-solid-svg-icons'
 import './Index.css'
 import ChartCategory from './ChartCategory/ChartCategory'
 import Navigation from '../Navigation/Navigation'
-import ListIndexFund from './ListIndexFund/ListIndexFund'
+import ListIndexSpotlight from './ListIndexSpotlight/ListIndexSpotlight'
+import ListMostFans from './ListMostFans/ListMostFans'
+import ListLeaderBoard from './ListLeaderBoard/ListLeaderBoard'
+// import ListIndexFund from './ListIndexFund/ListIndexFund'
 
 function Index() {
-    const [{user, indexFunds}, dispatch] = useStateValue()
+    const [{user, indexFunds, artistTokens }, dispatch] = useStateValue()
     const history = useHistory()
+
+    const code = new URLSearchParams(window.location.search).get('code')
+    
+    const [isLeaderboardGenres, setIsLeaderboardGenres] = useState(false)
+    const [isLeaderboardLabels, setIsLeaderboardLabels] = useState(false)
+    const [isLeaderboardArtists, setIsLeaderboardArtists] = useState(true)
+    const [isLeaderboardCollectibles, setIsLeaderboardCollectibles] = useState(false)
+
+    const setLeaderboard = (option) => {
+        if(option === 'genres'){
+            setIsLeaderboardGenres(true)
+            setIsLeaderboardLabels(false)
+            setIsLeaderboardArtists(false)
+            setIsLeaderboardCollectibles(false)
+        }
+        else if(option === 'labels'){
+            setIsLeaderboardGenres(false)
+            setIsLeaderboardLabels(true)
+            setIsLeaderboardArtists(false)
+            setIsLeaderboardCollectibles(false)
+        }
+        else if(option === 'artists'){
+            setIsLeaderboardGenres(false)
+            setIsLeaderboardLabels(false)
+            setIsLeaderboardArtists(true)
+            setIsLeaderboardCollectibles(false)
+        }
+        else if(option === 'collectibles'){
+            setIsLeaderboardGenres(false)
+            setIsLeaderboardLabels(false)
+            setIsLeaderboardArtists(false)
+            setIsLeaderboardCollectibles(true)
+        }
+    }
+
+
+    const [paginationLeaderCountStart, setPaginationLeaderCountStart] = useState(1)
+    const [paginationLeaderCountEnd, setPaginationLeaderCountEnd] = useState(4)
+    const [paginationFansCountStart, setPaginationFansCountStart] = useState(1)
+    const [paginationFansCountEnd, setPaginationFansCountEnd] = useState(3)
+    const [paginationIndexCountStart, setPaginationIndexCountStart] = useState(1)
+    const [paginationIndexCountEnd, setPaginationIndexCountEnd] = useState(4)
+
+    const paginate = (type, dir) => {
+        if(type === 'leaderboard'){
+            if(dir === 'left'){
+                if(paginationLeaderCountStart >= 5){
+                    setPaginationLeaderCountStart(paginationLeaderCountStart - 5)
+                    setPaginationLeaderCountEnd(paginationLeaderCountEnd - 5) 
+                }  
+            }else{
+                if(paginationLeaderCountEnd < artistTokens.length){
+                    setPaginationLeaderCountStart(paginationLeaderCountStart + 5);
+                    setPaginationLeaderCountEnd(paginationLeaderCountEnd + 5)
+                }
+            }
+            
+        }
+        else if(type === 'fans'){
+            if(dir === 'left'){
+                if(paginationFansCountStart >= 3){
+                    setPaginationFansCountStart(paginationFansCountStart - 3)
+                    setPaginationFansCountEnd(paginationFansCountEnd - 3) 
+                }  
+            }else{
+                if(paginationFansCountEnd < artistTokens.length){
+                    setPaginationFansCountStart(paginationFansCountStart + 3);
+                    setPaginationFansCountEnd(paginationFansCountEnd + 3)
+                }
+            }
+            
+        }
+        else if(type === 'index'){
+            if(dir === 'left'){
+                if(paginationIndexCountStart >= 4){
+                    setPaginationIndexCountStart(paginationIndexCountStart - 4)
+                    setPaginationIndexCountEnd(paginationIndexCountEnd - 4) 
+                }  
+            }else{
+                if(paginationIndexCountEnd < indexFunds.length){
+                    setPaginationIndexCountStart(paginationIndexCountStart + 4);
+                    setPaginationIndexCountEnd(paginationIndexCountEnd + 4)
+                }
+            }
+            
+        }
+    }
 
     useEffect(() =>{
         // if(user.type !== 'user')
         //     history.push('/login')
+        dispatch({
+            type:'LOGIN',
+            item:{
+                type: 'user'
+            }
+        })
 
-        console.log(user)
-        console.log(indexFunds)
+        //alert(code)
+
+        // console.log(user)
+        console.log(artistTokens)
     },[])
 
     return(
@@ -127,15 +225,18 @@ function Index() {
                 <Row>
                     <Col md={4}>
                     <Row>
-                    <Col style={{marginLeft: '10px', marginRight: '10px'}}>
+                        <Col style={{marginLeft: '10px', marginRight: '10px'}}>
                         <h1>Index Spotlight</h1>
                         <p style={{fontSize:'11px'}}>Invest in music market indexes to get exposure to sectors with artist prices determining the price of index</p>
                         <hr style={{color:'white'}} />
                     </Col>
-                </Row>
+                    </Row>
                         <Row style={{display:'flex'}}>
+                            <Col xs={5}>
+                            
+                            </Col>
                         
-                            <Col xs={8} style={{display:'flex', justifyContent:'flex-end'}}>
+                            <Col style={{display:'flex', justifyContent:'flex-end'}}>
                                 <span>Category</span>
                             </Col>
                             <Col>
@@ -145,48 +246,175 @@ function Index() {
                                 <span>Daily</span>
                             </Col>
                         </Row>
-                        {indexFunds.map(indexFund => (
-                            <p>{indexFund}</p>
-                        ))}
+                        {   indexFunds.sort((a,b) => b.dailyPercentChange - a.dailyPercentChange),
+                            indexFunds.map((fund, index) => (
+                                index >= paginationIndexCountStart-1 ?
+                                    index < paginationIndexCountEnd ?
+                                        <ListIndexSpotlight
+                                            indexFund={fund}
+                                        />
+                                    :
+                                    null
+                                :
+                                    null
+                            ))
+                        }
+                        <Row style={{display:'flex', justifyContent:'center', color:'white'}}>
+                        <Col style={{display:'flex',justifyContent:'flex-end'}}>
+                            <span 
+                                className="pagination"
+                                onClick={e => paginate('index', 'left')}
+                            >
+                                &#60;
+                            </span>
+                        </Col>
+                        <Col style={{display:'flex', justifyContent:'flex-start'}}>
+                            <span 
+                                className="pagination"
+                                onClick={e => paginate('index', 'right')}
+                            >
+                                &#62;
+                            </span>
+                        </Col>
+                    </Row>
+                    
+                    
+                        
                     </Col>
                     <Col md={4}>
                         <Row>
-                            <Col style={{ height: '100px',display:'flex'}}>
-                                <div style={{}}>
+                            <Col style={{ height: '100px'}}>
+                                {/* <div style={{}}> */}
                                 <h1>Leaderboard</h1>
                                 <br/>
-                                <hr style={{color:'white'}}/></div>
+                                <hr style={{color:'white'}}/>
+                                {/* </div> */}
+                                
                             </Col>
+                            
+                        </Row>
+                        <Row style={{marginBottom:'20px'}}>
+                            <div className="indexLeaderboardOptions" style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}}>
+                                    {isLeaderboardGenres ?
+                                     <span onClick={e => setLeaderboard('genres')} style={{fontWeight:'bold'}}>Genres</span> 
+                                     : <span onClick={e => setLeaderboard('genres')}>Genres</span> }
+                                    {isLeaderboardLabels ?
+                                     <span onClick={e => setLeaderboard('labels')} style={{fontWeight:'bold'}}>Labels</span> 
+                                     : <span onClick={e => setLeaderboard('labels')}>Labels</span> }
+                                    {isLeaderboardArtists ?
+                                     <span onClick={e => setLeaderboard('artists')} style={{fontWeight:'bold'}}>Artists</span> 
+                                     : <span onClick={e => setLeaderboard('artists')}>Artists</span> }
+                                    {isLeaderboardCollectibles ? 
+                                    <span onClick={e => setLeaderboard('collectibles')} style={{fontWeight:'bold'}}>Collectibles</span> 
+                                    : <span onClick={e => setLeaderboard('collectibles')}>Collectibles</span> 
+                                    }
+                            </div>
                         </Row>
                         <Row>
                         <Row style={{display:'flex'}}>
                         
-                        <Col xs={8} style={{display:'flex', justifyContent:'flex-end'}}>
-                            <span>Category</span>
+                        <Col xs={7} style={{display:'flex', justifyContent:'center', marginLeft:'-2px'}}>
+                            <span>NAME</span>
                         </Col>
-                        <Col>
+                        <Col style={{justifyContent:'flex-start'}}>
                             <span>AUM</span>
                         </Col>
-                        <Col>
-                            <span>Daily</span>
+                        <Col style={{display:'flex', alignItems:'flex-end',justifyContent:'center'}}>
+                            <span>DAILY</span>
                         </Col>
                     </Row>
-                    {indexFunds.map(indexFund => (
-                        <p>{indexFund}</p>
-                    ))}
-                        </Row>
+                
+                    {
+                        artistTokens.sort((a,b) => b.dailyPercentChange - a.dailyPercentChange),
+                        artistTokens.map((artist, index) => (
+                            index >= paginationLeaderCountStart-1 ?
+                                index < paginationLeaderCountEnd ?
+                                    <ListLeaderBoard
+                                        artist={artist}
+                                    />
+                                :
+                                null
+                            :
+                                null
+                        ))
+                    }
+                    <Row style={{display:'flex', justifyContent:'center', color:'white'}}>
+                        <Col style={{display:'flex',justifyContent:'flex-end'}}>
+                            <span 
+                                className="pagination"
+                                onClick={e => paginate('leaderboard', 'left')}
+                            >
+                                &#60;
+                            </span>
+                        </Col>
+                        <Col style={{display:'flex', justifyContent:'flex-start'}}>
+                            <span 
+                                className="pagination"
+                                onClick={e => paginate('leaderboard', 'right')}
+                            >
+                                &#62;
+                            </span>
+                        </Col>
+                    </Row>
+                    
+                    </Row>
                     
                     </Col>
                     <Col md={4}> 
-                        <Row>
-                            <Col>
-                            <h1>Most Fans</h1>
-                            <br/>
-                            <hr style={{color:'white'}}/>
+                        <Row style={{display:'flex', alignItems:'flex-end'}}>
+                            <Col xs={6}>
+                                <br/>
+                                <h3 style={{color: 'white'}}>Most Fans</h3>
+                                
+                                
+                            </Col>
+                            <Col xs={3} >
+                                <span>Category</span>
+                            </Col>
+                            <Col xs={3}>
+                                <span>This Week</span>
                             </Col>
                         </Row>
-                        <ListIndexFund />
+                        {/* <br /> */}
+                        <hr style={{color:'white'}}/>
+                            {/* <ListMostFans
+                                
+                            /> */}
+                            {
+                                artistTokens.sort((a,b) => b.numberOfTokenHolders - a.numberOfTokenHolders),
+                                artistTokens.map((artist, index) => (
+                                    index >= paginationFansCountStart - 1 ?
+                                        index < paginationFansCountEnd ?
+                                            <ListMostFans
+                                                artist={artist}
+                                            />
+                                        :
+                                        null
+                                    :
+                                    null
+                                ))
+                            }
+                        <Row style={{display:'flex', justifyContent:'center', color:'white'}}>
+                        <Col style={{display:'flex',justifyContent:'flex-end'}}>
+                            <span 
+                                className="pagination"
+                                onClick={e => paginate('fans', 'left')}
+                            >
+                                &#60;
+                            </span>
+                        </Col>
+                        <Col style={{display:'flex', justifyContent:'flex-start'}}>
+                            <span 
+                                className="pagination"
+                                onClick={e => paginate('fans', 'right')}
+                            >
+                                &#62;
+                            </span>
+                        </Col>
+                    </Row>
+
                     </Col>
+                    
                 </Row>
             </Container>
         </div>

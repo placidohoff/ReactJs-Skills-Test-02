@@ -29,3 +29,15 @@
 .index h1 {
   color: white;
 }
+
+.indexLeaderboardOptions span {
+  cursor: pointer;
+}
+
+.pagination {
+  border: 1px solid white;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
