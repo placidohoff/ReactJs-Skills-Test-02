@@ -15,9 +15,6 @@ const App =() => {
 
       <Switch>
 
-        {/* <Route path="/index">
-          <Index />
-        </Route> */}
 
         <Route path="/charts">
           <Index />
@@ -27,9 +24,6 @@ const App =() => {
           <Login />
         </Route>
 
-        {/* <Route path="/test">
-          <Test />
-        </Route> */}
 
         <Route path="/viewindex">
           <ViewIndex />

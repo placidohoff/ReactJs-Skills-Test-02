@@ -9,7 +9,7 @@ function Login(){
     const [password, setPassword] = useState('');
     const history = useHistory();
 
-    const login = (e, type) => {
+    const login = (type) => {
         if(type === "user"){
             dispatch({
                 type:'LOGIN',
@@ -28,9 +28,9 @@ function Login(){
 
                 <input placeholder="password" type="text" value={password} />
 
-                <button type="submit" onClick={e => login(e, 'user')}>User</button>
+                <button type="submit" onClick={e => login('user')}>User</button>
                 
-                <button type="submit" onClick={e => login(e, 'artist')}>Artist</button>
+                <button type="submit" onClick={e => login('artist')}>Artist</button>
             </form>
             
         </div>
