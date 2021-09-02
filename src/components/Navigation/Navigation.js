@@ -84,6 +84,24 @@ function Navigation(){
                   GIVEAWAYS
               </li>
             </ul>
+            <div
+              className="icon"
+              style={{
+                display:'flex',
+                justifyContent:'center',
+                justifySelf:'center',
+                padding:'10px',
+                marginTop: '20px',
+                marginBottom:'40px',
+                color: 'white',
+                backgroundColor: '#00cc9b',
+                width:'80%',
+                marginLeft: '20px',
+              }}
+              onClick={showPopup}
+            >
+              connect wallet
+            </div>
             <Container>
                 <Row 
                   // style={{
