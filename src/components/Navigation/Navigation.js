@@ -17,6 +17,8 @@ import { useHistory } from 'react-router-dom'
 function Navigation(){
     const [isMenuOpened, setIsMenuOpened] = useState(false)
 
+
+    /* POPUP COMPONENT VARIABLES */
     const [show,setShow] = useState(false)
     
     const showPopup = () => setShow(true)
@@ -27,10 +29,13 @@ function Navigation(){
     
     return (
       <>
+      {/* POPUP COMPONENT */}
       <Popup
         show={show}
         close={close}
       />
+
+      {/* NAVIGATION COMPONENT */}
         <OffCanvas
           width={400}
           transitionDuration={300}
@@ -59,6 +64,8 @@ function Navigation(){
               
             
           </OffCanvasBody>
+
+          
           <OffCanvasMenu className={'navigationBody'}
             width={500}
             style={{
@@ -80,9 +87,7 @@ function Navigation(){
               <li onClick={showPopup}>COLLAB</li>
               <li onClick={showPopup}>DROPS</li>
               <li onClick={showPopup}>COLLECTIONS</li>
-              <li onClick={showPopup}>
-                  GIVEAWAYS
-              </li>
+              <li onClick={showPopup}>GIVEAWAYS</li>
             </ul>
             <div
               className="icon"

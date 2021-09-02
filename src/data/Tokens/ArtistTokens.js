@@ -1,6 +1,3 @@
-// fetch('https://api.github.com/users/hacktivist123/repos')
-//   .then(response => response.json())
-//   .then(data => console.log(data));
 
 export const collectionOfArtist = [
     {
@@ -56,13 +53,6 @@ export const collectionOfArtist = [
 ]
 
 
-const getPriceOfCoin = () => {
-    return 0
-}
-
-const getDailyPercentChange = () => {
-    return 0;
-}
 
 export const getArtistTokens = () => {
     let tokens = []
@@ -72,62 +62,33 @@ export const getArtistTokens = () => {
     return tokens;
 }
 
-// function artistToken{
-//     artistName;
-//     img;
-//     constructor(){
-//         this.artistName = collectionOfArtist[nameAndImageNumber].name,
-//         this.img = collectionOfArtist[nameAndImageNumber].img,
-//         this.description = '',
-//         this.tokenContactAddress = '',
-//         this.dropStatus = {
-//             presaleStart: '',
-//             presaleEnd: ''
-//         },
-//         this.tokenomics = {
-
-//         },
-//         this.socialMediaLinks = [{
-
-//         }],
-//         this.priceOfCoin = getPriceOfCoin(),
-//         this.dailyPercentChange = getDailyPercentChange(),
-//         this.volumeCoin = 0,
-//         this.numberOfTokenHolders = Math.floor(Math.random() * 1000000),
-//         this.about = '',
-//         this.tags = [],
-//         this.analytics = {
-
-//         }
-//     }
-// }
 
 function artistToken(){
+    
     const nameAndImageNumber = Math.floor(Math.random() * collectionOfArtist.length)
 
-    // console.log('NUMBER ', nameAndImageNumber )
     return {
-        name: collectionOfArtist[nameAndImageNumber].name,
-        img: collectionOfArtist[nameAndImageNumber].img,
-        description: '',
-        tokenContactAddress: '',
-        dropStatus: {
-            presaleStart: '',
-            presaleEnd: ''
-        },
-        tokenomics: {
+            name: collectionOfArtist[nameAndImageNumber].name,
+            img: collectionOfArtist[nameAndImageNumber].img,
+            description: '',
+            tokenContactAddress: '',
+            dropStatus: {
+                presaleStart: '',
+                presaleEnd: ''
+            },
+            tokenomics: {
 
-        },
-        socialMediaLinks: [{
+            },
+            socialMediaLinks: [{
 
-        }],
-        priceOfCoin: getPriceOfCoin(),
-        dailyPercentChange: Math.floor(Math.random() * 35) - Math.floor(Math.random() * 15),
-        volumeCoin: 0,
-        numberOfTokenHolders: Math.floor(Math.random() * 1000000),
-        about: '',
-        tags: [],
-        analytics: {
+            }],
+            priceOfCoin: getPriceOfCoin(),
+            dailyPercentChange: Math.floor(Math.random() * 35) - Math.floor(Math.random() * 15),
+            volumeCoin: 0,
+            numberOfTokenHolders: Math.floor(Math.random() * 1000000),
+            about: '',
+            tags: [],
+            analytics: {
 
         },
     }

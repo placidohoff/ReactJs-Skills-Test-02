@@ -5,11 +5,13 @@ import './ChartCategory.css'
 import Popup from '../../Popup/Popup'
 
 function ChartCategory(props){
+
     const [show, setShow] = useState(false)
     
     const showPopup = () =>  setShow(true)
 
     const close = () => setShow(false)
+    
     return(
         <>
         <Popup 
@@ -28,9 +30,34 @@ function ChartCategory(props){
 
             }}
         >
-            <span style={{zIndex:2, color:'white',fontWeight:'bold', fontSize:'20px', gridColumn:1, gridRow:1, alignSelf:'flex-end', justifySelf:'flex-end'}}>{props.name}</span>
+            <span 
+                style={{
+                    zIndex:2,
+                    color:'white',
+                    fontWeight:'bold', 
+                    fontSize:'20px', 
+                    gridColumn:1, 
+                    gridRow:1, 
+                    alignSelf:'flex-end', 
+                    justifySelf:'flex-end'
+                }}
+            >
+                     {props.name}
+                </span>
             
-            <img style={{zIndex:1, gridColumn:1, gridRow:1, opacity:'.4', borderRadius:'20px', alignSelf:'flex-start'}} class="img-fluid" src={guitar} />
+            <img 
+                style={{
+                    zIndex:1, 
+                    gridColumn:1, 
+                    gridRow:1, 
+                    opacity:'.4', 
+                    borderRadius:'20px', 
+                    alignSelf:'flex-start'
+                }} 
+                class="img-fluid" 
+
+                src={guitar} 
+            />
         </div>
         </>
     )

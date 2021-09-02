@@ -33,6 +33,7 @@ function Popup(props) {
         >
           {/* <Modal.Title>Modal heading</Modal.Title> */}
         </Modal.Header>
+
             <Modal.Body
                 style={{
                     display:'flex',
@@ -43,7 +44,9 @@ function Popup(props) {
               <p style={{
                   color:'black',
                   fontWeight:'bold'
-                }}>Coming Soon!</p>
+                }}>
+                    Coming Soon!
+                </p>
               
             </Modal.Body>
             

@@ -121,17 +121,17 @@ function Index() {
     return(
         <div class="index">
             <Container>
-                {/* <Popup 
-                    show={show}
-                    close={close}
-                /> */}
-                <Navigation
-                    style={{zIndex:100}}
-                />
-                <Row 
-                    className="d-flex justify-content-center" 
-                    style={{border: '1px solid black'}}
-                >
+
+                {/* NAVIGATION */}
+                    <Navigation
+                        style={{zIndex:100}}
+                    />
+
+                {/* HEADER */}
+                    <Row 
+                        className="d-flex justify-content-center" 
+                        style={{border: '1px solid black'}}
+                    >
                    
                     <Col 
                         xs={3}
@@ -150,8 +150,6 @@ function Index() {
                     </Col>
                     <Col
                         xs={{span: 4, fontWeight: 'bold', mx: 'auto'}}
-                        // sm={4}
-                        // className="ml-4 justify-content-center"
                         style={{display:'flex', justifyContent:'center', alignItems:'flex-end'}}
                     >
                         <span
@@ -176,38 +174,32 @@ function Index() {
                             <span class="indexMusicIndustry">Music</span>
                             <span class="indexMusicIndustry">Industry</span>
                             </div>
-                            <Button size='sm' style={{borderRadius: '20px', backgroundColor: '#00cc9b'}}>&#8593; 50%</Button>
+                            <Button size='sm' style={{borderRadius: '20px', backgroundColor: '#00cc9b'}}>
+                                &#8593; {Math.floor(Math.random() * 30)+'%'}
+                            </Button>
                             
                         </div>
                     </Col>
-                    {/* <Col>
-                        <p>Charts</p>
-                    </Col> */}
+                    
                 </Row>
-                <Row
+                
+                {/* CHART TYPES  */}
+                    <Row
                     style={{display:'flex'}}
                 >
-                    <Col xs={6} md={3}
+                    <Col xs={6} md={3}> 
                         
-                    > 
-                        <div>
                         <ChartCategory 
                             name="GENRES"                
                         />
-                        </div>
+                        
                     </Col>
-                    <Col xs={6}  md={3}
-                        // style={{border:'1px solid white'}}
-
-                    > 
+                    <Col xs={6}  md={3}> 
                         <ChartCategory 
                             name="LABELS"                
                         />
                     </Col>
-                    <Col xs={6} md={3}
-                        // style={{border:'1px solid white'}}
-
-                    > 
+                    <Col xs={6} md={3}> 
                         <ChartCategory 
                             name="GROUPS"                
                         />
@@ -223,37 +215,123 @@ function Index() {
                     
                 </Row>
                 
-                <br />
-                <Row>
-                    <Col md={4}>
+                {/* ARTIST & INDEX LIST */}
+                    <br />
                     <Row>
-                        <Col style={{marginLeft: '10px', marginRight: '10px'}}>
-                        <h1>Index Spotlight</h1>
-                        <p style={{fontSize:'11px'}}>Invest in music market indexes to get exposure to sectors with artist prices determining the price of index</p>
-                        <hr style={{color:'white'}} />
-                    </Col>
-                    </Row>
-                        <Row style={{display:'flex'}}>
-                            <Col xs={5}>
-                            
-                            </Col>
                         
-                            <Col style={{display:'flex', justifyContent:'flex-end'}}>
-                                <span>Category</span>
+                        <Col md={4}>
+                        <Row>
+                            <Col style={{marginLeft: '10px', marginRight: '10px'}}>
+                            <h1>Index Spotlight</h1>
+                            <p style={{fontSize:'11px'}}>Invest in music market indexes to get exposure to sectors with artist prices determining the price of index</p>
+                            <hr style={{color:'white'}} />
+                        </Col>
+                        </Row>
+                            <Row style={{display:'flex'}}>
+                                <Col xs={5}>
+                                
+                                </Col>
+                            
+                                <Col style={{display:'flex', justifyContent:'flex-end'}}>
+                                    <span>Category</span>
+                                </Col>
+                                <Col>
+                                    <span>AUM</span>
+                                </Col>
+                                <Col>
+                                    <span>Daily</span>
+                                </Col>
+                            </Row>
+
+                            {   
+                                indexFunds.sort((a,b) => b.dailyPercentChange - a.dailyPercentChange),
+                                
+                                indexFunds.map((fund, index) => (
+                                    index >= paginationIndexCountStart-1 ?
+                                        index < paginationIndexCountEnd ?
+                                            <ListIndexSpotlight
+                                                indexFund={fund}
+                                            />
+                                        :
+                                        null
+                                    :
+                                        null
+                                ))
+                            }
+
+                            <Row style={{display:'flex', justifyContent:'center', color:'white'}}>
+                            <Col style={{display:'flex',justifyContent:'flex-end'}}>
+                                <span 
+                                    className="pagination"
+                                    onClick={e => paginate('index', 'left')}
+                                >
+                                    &#60;
+                                </span>
                             </Col>
-                            <Col>
-                                <span>AUM</span>
-                            </Col>
-                            <Col>
-                                <span>Daily</span>
+                            <Col style={{display:'flex', justifyContent:'flex-start'}}>
+                                <span 
+                                    className="pagination"
+                                    onClick={e => paginate('index', 'right')}
+                                >
+                                    &#62;
+                                </span>
                             </Col>
                         </Row>
-                        {   indexFunds.sort((a,b) => b.dailyPercentChange - a.dailyPercentChange),
-                            indexFunds.map((fund, index) => (
-                                index >= paginationIndexCountStart-1 ?
-                                    index < paginationIndexCountEnd ?
-                                        <ListIndexSpotlight
-                                            indexFund={fund}
+                        
+                        
+                            
+                        </Col>
+                        
+                        <Col md={4}>
+                            <Row>
+                                <Col style={{ height: '100px'}}>
+                                    {/* <div style={{}}> */}
+                                    <h1>Leaderboard</h1>
+                                    <br/>
+                                    <hr style={{color:'white'}}/>
+                                    {/* </div> */}
+                                    
+                                </Col>
+                                
+                            </Row>
+                            <Row style={{marginBottom:'20px'}}>
+                                <div className="indexLeaderboardOptions" style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}}>
+                                        {isLeaderboardGenres ?
+                                        <span onClick={e => setLeaderboard('genres')} style={{fontWeight:'bold'}}>Genres</span> 
+                                        : <span onClick={e => setLeaderboard('genres')}>Genres</span> }
+                                        {isLeaderboardLabels ?
+                                        <span onClick={e => setLeaderboard('labels')} style={{fontWeight:'bold'}}>Labels</span> 
+                                        : <span onClick={e => setLeaderboard('labels')}>Labels</span> }
+                                        {isLeaderboardArtists ?
+                                        <span onClick={e => setLeaderboard('artists')} style={{fontWeight:'bold'}}>Artists</span> 
+                                        : <span onClick={e => setLeaderboard('artists')}>Artists</span> }
+                                        {isLeaderboardCollectibles ? 
+                                        <span onClick={e => setLeaderboard('collectibles')} style={{fontWeight:'bold'}}>Collectibles</span> 
+                                        : <span onClick={e => setLeaderboard('collectibles')}>Collectibles</span> 
+                                        }
+                                </div>
+                            </Row>
+                            <Row>
+                            <Row style={{display:'flex'}}>
+                            
+                            <Col xs={7} style={{display:'flex', justifyContent:'center', marginLeft:'-2px'}}>
+                                <span>NAME</span>
+                            </Col>
+                            <Col style={{justifyContent:'flex-start'}}>
+                                <span>AUM</span>
+                            </Col>
+                            <Col style={{display:'flex', alignItems:'flex-end',justifyContent:'center'}}>
+                                <span>DAILY</span>
+                            </Col>
+                        </Row>
+                    
+                        {
+                            artistTokens.sort((a,b) => b.dailyPercentChange - a.dailyPercentChange),
+                            artistTokens.map((artist, index) => (
+                                index >= paginationLeaderCountStart-1 ?
+                                    index < paginationLeaderCountEnd ?
+                                        <ListLeaderBoard
+                                            artist={artist}
                                         />
                                     :
                                     null
@@ -262,107 +340,29 @@ function Index() {
                             ))
                         }
                         <Row style={{display:'flex', justifyContent:'center', color:'white'}}>
-                        <Col style={{display:'flex',justifyContent:'flex-end'}}>
-                            <span 
-                                className="pagination"
-                                onClick={e => paginate('index', 'left')}
-                            >
-                                &#60;
-                            </span>
-                        </Col>
-                        <Col style={{display:'flex', justifyContent:'flex-start'}}>
-                            <span 
-                                className="pagination"
-                                onClick={e => paginate('index', 'right')}
-                            >
-                                &#62;
-                            </span>
-                        </Col>
-                    </Row>
-                    
-                    
-                        
-                    </Col>
-                    <Col md={4}>
-                        <Row>
-                            <Col style={{ height: '100px'}}>
-                                {/* <div style={{}}> */}
-                                <h1>Leaderboard</h1>
-                                <br/>
-                                <hr style={{color:'white'}}/>
-                                {/* </div> */}
-                                
+                            <Col style={{display:'flex',justifyContent:'flex-end'}}>
+                                <span 
+                                    className="pagination"
+                                    onClick={e => paginate('leaderboard', 'left')}
+                                >
+                                    &#60;
+                                </span>
                             </Col>
-                            
+                            <Col style={{display:'flex', justifyContent:'flex-start'}}>
+                                <span 
+                                    className="pagination"
+                                    onClick={e => paginate('leaderboard', 'right')}
+                                >
+                                    &#62;
+                                </span>
+                            </Col>
                         </Row>
-                        <Row style={{marginBottom:'20px'}}>
-                            <div className="indexLeaderboardOptions" style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}}>
-                                    {isLeaderboardGenres ?
-                                     <span onClick={e => setLeaderboard('genres')} style={{fontWeight:'bold'}}>Genres</span> 
-                                     : <span onClick={e => setLeaderboard('genres')}>Genres</span> }
-                                    {isLeaderboardLabels ?
-                                     <span onClick={e => setLeaderboard('labels')} style={{fontWeight:'bold'}}>Labels</span> 
-                                     : <span onClick={e => setLeaderboard('labels')}>Labels</span> }
-                                    {isLeaderboardArtists ?
-                                     <span onClick={e => setLeaderboard('artists')} style={{fontWeight:'bold'}}>Artists</span> 
-                                     : <span onClick={e => setLeaderboard('artists')}>Artists</span> }
-                                    {isLeaderboardCollectibles ? 
-                                    <span onClick={e => setLeaderboard('collectibles')} style={{fontWeight:'bold'}}>Collectibles</span> 
-                                    : <span onClick={e => setLeaderboard('collectibles')}>Collectibles</span> 
-                                    }
-                            </div>
-                        </Row>
-                        <Row>
-                        <Row style={{display:'flex'}}>
                         
-                        <Col xs={7} style={{display:'flex', justifyContent:'center', marginLeft:'-2px'}}>
-                            <span>NAME</span>
+                        </Row>
+                        
                         </Col>
-                        <Col style={{justifyContent:'flex-start'}}>
-                            <span>AUM</span>
-                        </Col>
-                        <Col style={{display:'flex', alignItems:'flex-end',justifyContent:'center'}}>
-                            <span>DAILY</span>
-                        </Col>
-                    </Row>
-                
-                    {
-                        artistTokens.sort((a,b) => b.dailyPercentChange - a.dailyPercentChange),
-                        artistTokens.map((artist, index) => (
-                            index >= paginationLeaderCountStart-1 ?
-                                index < paginationLeaderCountEnd ?
-                                    <ListLeaderBoard
-                                        artist={artist}
-                                    />
-                                :
-                                null
-                            :
-                                null
-                        ))
-                    }
-                    <Row style={{display:'flex', justifyContent:'center', color:'white'}}>
-                        <Col style={{display:'flex',justifyContent:'flex-end'}}>
-                            <span 
-                                className="pagination"
-                                onClick={e => paginate('leaderboard', 'left')}
-                            >
-                                &#60;
-                            </span>
-                        </Col>
-                        <Col style={{display:'flex', justifyContent:'flex-start'}}>
-                            <span 
-                                className="pagination"
-                                onClick={e => paginate('leaderboard', 'right')}
-                            >
-                                &#62;
-                            </span>
-                        </Col>
-                    </Row>
-                    
-                    </Row>
-                    
-                    </Col>
-                    <Col md={4}> 
+                        
+                        <Col md={4}> 
                         <Row style={{display:'flex', alignItems:'flex-end'}}>
                             <Col xs={6}>
                                 <br/>
@@ -418,6 +418,7 @@ function Index() {
                     </Col>
                     
                 </Row>
+            
             </Container>
         </div>
     )
