@@ -38,15 +38,16 @@ let overallPercent = 100;
 
 function indexFund(){
     const nameAndImageNumber = Math.floor(Math.random() * indexCollection.length)
+    // const name = 
     
     let holdings = []
     
     let i = 0;
 
     const getPercent = (total) => {
-        let number = Math.floor(Math.random() * overallPercent)
+        let number = Math.floor(Math.random() * total)
         overallPercent -= number
-        return number
+        return
     }
 
     for(let i = 0; i < 6; i++){
