@@ -10,15 +10,16 @@ import ViewIndex from './components/ViewIndex/ViewIndex.js'
 const App =() => {
   return(
     <Router>
+
     <div className="app">
+
       <Switch>
-        <Route path="/index">
-          {/* <Navigation /> */}
+
+        {/* <Route path="/index">
           <Index />
-        </Route>
+        </Route> */}
 
         <Route path="/charts">
-          {/* <Navigation /> */}
           <Index />
         </Route>
 
@@ -26,9 +27,9 @@ const App =() => {
           <Login />
         </Route>
 
-        <Route path="/test">
+        {/* <Route path="/test">
           <Test />
-        </Route>
+        </Route> */}
 
         <Route path="/viewindex">
           <ViewIndex />
@@ -39,7 +40,9 @@ const App =() => {
         </Route>
       
       </Switch>
+
     </div>
+
     </Router>
   )
 }
