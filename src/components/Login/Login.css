@@ -1,0 +1,7 @@
+.login {
+  height: 100vh;
+  background: #000000;
+  background: -webkit-linear-gradient(top left, #000000, #5c615b);
+  background: -moz-linear-gradient(top left, #000000, #5c615b);
+  background: linear-gradient(to bottom right, #000000, #5c615b);
+}

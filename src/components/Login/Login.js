@@ -2,6 +2,7 @@ import React , { useState } from 'react'
 import './Login.css'
 import { useStateValue } from '../../StateProvider.js'
 import { useHistory } from 'react-router-dom'
+import Logo from '../../img/musiswap.png'
 
 function Login(){
     const [{user}, dispatch] = useStateValue();
@@ -23,7 +24,8 @@ function Login(){
 
     return(
         <div className="login">
-            <form>
+            <img className="img-fluid rounded-circle" src={Logo} />
+            {/* <form>
                 <input placeholder="username" type="text" value={username} />
 
                 <input placeholder="password" type="text" value={password} />
@@ -31,7 +33,7 @@ function Login(){
                 <button type="submit" onClick={e => login('user')}>User</button>
                 
                 <button type="submit" onClick={e => login('artist')}>Artist</button>
-            </form>
+            </form> */}
             
         </div>
     )

@@ -20,18 +20,18 @@ const App =() => {
           <Index />
         </Route>
 
-        <Route path="/login">
-          <Login />
-        </Route>
-
-
         <Route path="/viewindex">
           <ViewIndex />
         </Route>
 
         <Route path="/">
-          <Login />
+          <Index />
         </Route>
+
+        {/* <Route path="/login">
+          <Login />
+        </Route> */}
+
       
       </Switch>
 
